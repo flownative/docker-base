@@ -3,8 +3,8 @@ build_image:
   services:
   - docker:dind
   script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker build -t registry.gitlab.com/flownative/docker-base .
-    - docker push registry.gitlab.com/flownative/docker-base
+    - docker login -e gitlab-runner@flownative-beach.iam.gserviceaccount.com -u _json_key -p "$GOOGLE_SERVICE_ACCOUNT_PASSWORD" https://eu.gcr.io
+    - docker build -t eu.gcr.io/flownative-beach/base .
+    - docker push eu.gcr.io/flownative-beach/base
   only:
     - master
