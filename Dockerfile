@@ -5,7 +5,7 @@ MAINTAINER Robert Lemke <robert@flownative.com>
 # Install essentials:
 RUN apt-get update \
  && apt-get upgrade -y -o Dpkg::Options::="--force-confold" \
- && apt-get install -y ca-certificates sudo zip unzip zsh ntp curl wget libxml2 sudo netcat language-pack-en --no-install-recommends \
+ && apt-get install -y ca-certificates sudo zip unzip zsh ntp curl wget libxml2 sudo netcat language-pack-en gettext-base --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
