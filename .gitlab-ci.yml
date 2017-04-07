@@ -1,18 +1,25 @@
+image: docker:git
+
 services:
   - docker:dind
 
 stages:
-- build
+  - build
+
+before_script:
+  - docker login -u _json_key -p "$CI_CONTAINER_REGISTRY_TOKEN" https://eu.gcr.io
+
+variables:
+  DOCKER_HOST: 'tcp://localhost:2375'
 
 build-latest:
   stage: build
-  image: eu.gcr.io/flownative-beach/gitlab-base-php:7-0
-  variables:
-    DOCKER_HOST: 'tcp://localhost:2375'
   script:
     - docker login -u _json_key -p "$CI_CONTAINER_REGISTRY_TOKEN" https://eu.gcr.io
     - docker build -t eu.gcr.io/flownative-beach/base:latest .
     - docker push eu.gcr.io/flownative-beach/base:latest
+  only:
+    - master
 
 build-tagged:
   stage: build
