@@ -24,8 +24,8 @@ build-latest:
 build-tagged:
   stage: build
   script:
-    - docker build -t eu.gcr.io/flownative-beach/beach-gateway-ssh:${CI_BUILD_REF_SLUG} .
-    - docker push eu.gcr.io/flownative-beach/beach-gateway-ssh:${CI_BUILD_REF_SLUG}
+    - docker build -t eu.gcr.io/flownative-beach/beach:${CI_BUILD_REF_SLUG} .
+    - docker push eu.gcr.io/flownative-beach/beach:${CI_BUILD_REF_SLUG}
   only:
     - tags
   except:
