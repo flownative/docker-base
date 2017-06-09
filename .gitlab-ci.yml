@@ -13,20 +13,11 @@ variables:
   DOCKER_HOST: 'tcp://localhost:2375'
   DOCKER_DRIVER: 'overlay'
 
-build-latest:
-  stage: build
-  script:
-    - docker login -u _json_key -p "$CI_CONTAINER_REGISTRY_TOKEN" https://eu.gcr.io
-    - docker build -t eu.gcr.io/flownative-beach/base:latest .
-    - docker push eu.gcr.io/flownative-beach/base:latest
-  only:
-    - master
-
 build-tagged:
   stage: build
   script:
-    - docker build -t eu.gcr.io/flownative-beach/beach:${CI_BUILD_REF_SLUG} .
-    - docker push eu.gcr.io/flownative-beach/beach:${CI_BUILD_REF_SLUG}
+    - docker build -t eu.gcr.io/flownative-beach/beach:${CI_COMMIT_TAG} .
+    - docker push eu.gcr.io/flownative-beach/beach:${CI_COMMIT_TAG}
   only:
     - tags
   except:
