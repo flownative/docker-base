@@ -11,6 +11,7 @@ before_script:
 
 variables:
   DOCKER_HOST: 'tcp://localhost:2375'
+  DOCKER_DRIVER: 'overlay'
 
 build-latest:
   stage: build
