@@ -12,15 +12,27 @@ before_script:
 variables:
   DOCKER_HOST: 'tcp://localhost:2375'
   DOCKER_DRIVER: 'overlay'
+  DOCKER_IMAGE_NAME: 'base'
 
 build-tagged:
   stage: build
-  script:
-    - docker build -t eu.gcr.io/flownative-beach/base:${CI_COMMIT_TAG} .
-    - docker push eu.gcr.io/flownative-beach/base:${CI_COMMIT_TAG}
-    - docker tag eu.gcr.io/flownative-beach/base:${CI_COMMIT_TAG} eu.gcr.io/flownative-beach/base:latest
-    - docker push eu.gcr.io/flownative-beach/base:latest
+  image: eu.gcr.io/flownative-beach/beach-phpfpm-did:latest
   only:
     - tags
-  except:
-    - master
+  script:
+  - export MAJOR="$(echo $CI_COMMIT_TAG | cut -d'.' -f1)"
+  - export MINOR="$(echo $CI_COMMIT_TAG | cut -d'.' -f2)"
+
+  - docker build -t eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID} .
+  - docker push eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID}
+
+  - docker tag eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID} eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG}
+  - docker push eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG}
+  - docker tag eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID} eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${MAJOR}
+  - docker push eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${MAJOR}
+  - docker tag eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID} eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${MAJOR}.${MINOR}
+  - docker push eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:${MAJOR}.${MINOR}
+  - docker tag eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:build-${CI_JOB_ID} eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:latest
+  - docker push eu.gcr.io/flownative-beach/${DOCKER_IMAGE_NAME}:latest
+
+  - curl -d content="<b>Docker image base ${CI_COMMIT_REF_NAME} has been released.</b>" https://3.basecamp.com/3923521/integrations/${BASECAMP_CHATBOT_TOKEN}/buckets/6162023/chats/851880111/lines
