@@ -1,5 +1,5 @@
-#FROM ubuntu:16.04
-FROM phusion/baseimage:0.10.2
+#FROM ubuntu:18.04
+FROM phusion/baseimage:0.11
 MAINTAINER Robert Lemke <robert@flownative.com>
 
 # Install essentials:
