@@ -13,7 +13,7 @@ build-master:
   variables:
     DOCKER_HOST: 'tcp://docker:2375'
     DOCKER_DRIVER: 'overlay2'
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${CI_JOB_ID}
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${$CI_COMMIT_REF_SLUG}
   except:
   - tags
   script:
@@ -30,7 +30,7 @@ container_scanning:
     ## https://docs.gitlab.com/ee/ci/variables/#predefined-variables-environment-variables
     CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
     CI_APPLICATION_TAG: $CI_COMMIT_SHA
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${CI_JOB_ID}
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${$CI_COMMIT_REF_SLUG}
   allow_failure: true
   services:
   - docker:stable-dind
