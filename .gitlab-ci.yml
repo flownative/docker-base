@@ -22,6 +22,7 @@ build-master:
 
 container_scanning:
   image: docker:stable
+  stage: build
   variables:
     DOCKER_DRIVER: overlay2
 
