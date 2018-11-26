@@ -1,8 +1,3 @@
-image: docker:git
-
-services:
-  - docker:dind
-
 stages:
   - build
 
@@ -13,9 +8,12 @@ before_script:
 variables:
   DOCKER_HOST: 'tcp://localhost:2375'
   DOCKER_DRIVER: 'overlay2'
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${CI_JOB_ID}
 
 build-master:
+  image: docker:stable
+  services:
+  - docker:dind
   stage: build
   except:
   - tags
