@@ -13,24 +13,21 @@ build-master:
   variables:
     DOCKER_HOST: 'tcp://docker:2375'
     DOCKER_DRIVER: 'overlay2'
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${$CI_COMMIT_REF_SLUG}
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${CI_JOB_ID}
   except:
   - tags
   script:
   - docker build -t $IMAGE_TAG .
   - docker push $IMAGE_TAG
+  - docker tag $IMAGE_TAG $CI_REGISTRY_IMAGE:latest
+  - docker push $CI_REGISTRY_IMAGE:latest
 
 container_scanning:
   image: docker:stable
   stage: build
   variables:
     DOCKER_DRIVER: overlay2
-
-    ## Define two new variables based on GitLab's CI/CD predefined variables
-    ## https://docs.gitlab.com/ee/ci/variables/#predefined-variables-environment-variables
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
-    CI_APPLICATION_TAG: $CI_COMMIT_SHA
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:build-${$CI_COMMIT_REF_SLUG}
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
   allow_failure: true
   services:
   - docker:stable-dind
