@@ -28,6 +28,8 @@ build:
 
 scan-container:
   stage: test
+  only:
+  - tags
   allow_failure: true
   script:
   - docker run -d --name db arminc/clair-db:latest
