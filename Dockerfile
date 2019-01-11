@@ -19,7 +19,7 @@ RUN wget https://github.com/zyedidia/micro/releases/download/v${MICRO_VERSION}/m
     chmod 755 /usr/local/bin/micro; \
     rm -rf micro-${MICRO_VERSION}*
 
-ENV BAT_VERSION=0.7.0
+ENV BAT_VERSION=0.9.0
 RUN wget https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-musl_${BAT_VERSION}_amd64.deb; \
     dpkg -i bat-musl_${BAT_VERSION}_amd64.deb; \
     rm bat-musl_${BAT_VERSION}_amd64.deb
