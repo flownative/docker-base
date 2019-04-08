@@ -1,5 +1,5 @@
 include:
-  - project: 'flownative/operations/build-tools'
+  - project: 'flownative/infrastructure/build-tools'
     file: '/gitlab-ci/docker.gitlab-ci.yml'
-  - project: 'flownative/operations/build-tools'
+  - project: 'flownative/infrastructure/build-tools'
     file: '/gitlab-ci/docker.release-google.gitlab-ci.yml'
