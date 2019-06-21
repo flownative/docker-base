@@ -12,6 +12,7 @@ RUN apt-get update \
 # Generate locales for English and German:
 RUN echo "en_US UTF-8\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1\nde_DE UTF-8\nde_DE.UTF-8 UTF-8\nde_DE ISO-8859-1\n" > /var/lib/locales/supported.d/local && locale-gen --purge
 
+# For Micro releases see https://github.com/zyedidia/micro/releases
 ENV MICRO_VERSION=1.4.1
 RUN wget https://github.com/zyedidia/micro/releases/download/v${MICRO_VERSION}/micro-${MICRO_VERSION}-linux64.tar.gz; \
     tar xfz micro-${MICRO_VERSION}-linux64.tar.gz; \
@@ -19,7 +20,8 @@ RUN wget https://github.com/zyedidia/micro/releases/download/v${MICRO_VERSION}/m
     chmod 755 /usr/local/bin/micro; \
     rm -rf micro-${MICRO_VERSION}*
 
-ENV BAT_VERSION=0.9.0
+# For Bat releases see https://github.com/sharkdp/bat/releases
+ENV BAT_VERSION=0.11.0
 RUN wget https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-musl_${BAT_VERSION}_amd64.deb; \
     dpkg -i bat-musl_${BAT_VERSION}_amd64.deb; \
     rm bat-musl_${BAT_VERSION}_amd64.deb
