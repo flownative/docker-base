@@ -74,7 +74,6 @@ RUN wget --no-hsts https://github.com/zyedidia/micro/releases/download/v${MICRO_
 # For Bat releases see https://github.com/sharkdp/bat/releases
 ARG BAT_VERSION
 ENV BAT_VERSION=${BAT_VERSION}
-RUN echo "Bat version is: ${BAT_VERSION}"; \
-    wget --no-hsts  https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-musl_${BAT_VERSION}_amd64.deb; \
+RUN wget --no-hsts  https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-musl_${BAT_VERSION}_amd64.deb; \
     dpkg -i bat-musl_${BAT_VERSION}_amd64.deb; \
     rm -rf bat-musl_${BAT_VERSION}_amd64.deb /var/log/* /usr/share/doc/bat /var/lib/dpkg/status-old
