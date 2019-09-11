@@ -8,6 +8,4 @@ include:
 
 Nginx:
   stage: trigger
-  trigger:
-    project: flownative/docker/beach-nginx
-    branch: master
+  trigger: flownative/docker/beach-nginx
