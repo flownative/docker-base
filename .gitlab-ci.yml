@@ -7,5 +7,5 @@ include:
     file: '/gitlab-ci/docker.release-docker-io.gitlab-ci.yml'
 
 Nginx:
-  stage: trigger
+  stage: downstream
   trigger: flownative/docker/beach-nginx

@@ -58,6 +58,11 @@ MAINTAINER Robert Lemke <robert@flownative.com>
 
 COPY --from=baseimage / /
 
+ENV DEBIAN_FRONTEND="teletype" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US:en" \
+    LC_ALL="en_US.UTF-8"
+
 # Generate locales for English and German:
 RUN echo "en_US UTF-8\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1\nde_DE UTF-8\nde_DE.UTF-8 UTF-8\nde_DE ISO-8859-1\n" > /var/lib/locales/supported.d/local && \
     locale-gen --purge
@@ -77,3 +82,5 @@ ENV BAT_VERSION=${BAT_VERSION}
 RUN wget --no-hsts  https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-musl_${BAT_VERSION}_amd64.deb; \
     dpkg -i bat-musl_${BAT_VERSION}_amd64.deb; \
     rm -rf bat-musl_${BAT_VERSION}_amd64.deb /var/log/* /usr/share/doc/bat /var/lib/dpkg/status-old
+
+CMD ["/sbin/my_init"]
