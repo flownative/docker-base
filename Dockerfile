@@ -58,6 +58,8 @@ MAINTAINER Robert Lemke <robert@flownative.com>
 
 COPY --from=baseimage / /
 
+COPY conf/zshrc.conf /etc/zsh/zshrc
+
 ENV DEBIAN_FRONTEND="teletype" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
