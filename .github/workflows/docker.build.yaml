@@ -1,0 +1,41 @@
+name: Docker Image Build
+on:
+  push:
+    tags:
+      - '1.*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build Docker image
+        run: |
+          set +e
+          GIT_TAG=$(git describe --tags)
+          set -e
+          DOCKER_IMAGE_TAG_MAJOR=$(echo "$GIT_TAG" | cut -d"." -f1)
+          DOCKER_IMAGE_TAG_MINOR=$(echo "$GIT_TAG" | cut -d"." -f2)
+          DOCKER_IMAGE_TAG_PATCH=$(echo "$GIT_TAG" | cut -d"." -f3 | cut -d"-" -f1)
+          DOCKER_IMAGE_TAG_PATCH_WITH_SUFFIX=$(echo "$GIT_TAG" | cut -d"." -f3)
+          if [ "GIT_TAG" != "" ]; then DOCKER_IMAGE_TAG="${GIT_TAG}_b$(date +%s)"; else DOCKER_IMAGE_TAG="$(echo "$GITHUB_REF" | cut -d"/" -f3)_b$(date +%s)"; fi
+          DOCKER_IMAGE_GITHUB="docker.pkg.github.com/flownative/docker-base/base:${DOCKER_IMAGE_TAG}"
+          DOCKER_IMAGE_GITHUB_COMMIT="docker.pkg.github.com/${GITHUB_REPOSITORY}/base:${GITHUB_SHA}"
+
+          MICRO_VERSION=$(wget -qO- https://versions.flownative.io/projects/base/channels/stable/versions/micro.txt)
+          export MICRO_VERSION
+
+          BAT_VERSION=$(wget -qO- https://versions.flownative.io/projects/base/channels/stable/versions/bat.txt)
+          export BAT_VERSION
+
+          # git checkout ${GIT_TAG}
+          set -- "-t" "${DOCKER_IMAGE_GITHUB}"
+          env
+          docker build -t ${DOCKER_IMAGE_GITHUB} --build-arg MICRO_VERSION=${MICRO_VERSION} --build-arg BAT_VERSION=${BAT_VERSION} .
+
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u flownative --password-stdin docker.pkg.github.com
+          docker push ${DOCKER_IMAGE_GITHUB}
