@@ -1,0 +1,30 @@
+name: Docker Image Build
+on:
+  push:
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Publish docker.io image tags
+        uses: flownative/action-docker-publish-semver@master
+        with:
+          tag_ref: ${{ github.ref }}
+          tag_latest: 'yes'
+          source_image_name: docker.pkg.github.com/flownative/docker-base/base
+          source_registry_username: github
+          source_registry_password: ${{ secrets.GITHUB_TOKEN }}
+          source_registry_endpoint: https://docker.pkg.github.com/v2/
+          target_image_name: flownative/base
+          target_registry_username: ${{ secrets.DOCKER_IO_REGISTRY_USER }}
+          target_registry_password: ${{ secrets.DOCKER_IO_REGISTRY_PASSWORD }}
+          target_registry_endpoint: https://index.docker.io/v1/
