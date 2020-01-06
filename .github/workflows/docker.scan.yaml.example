@@ -1,0 +1,22 @@
+name: Vulnerability Scan
+
+on:
+  push:
+  schedule:
+    - cron: '0 9 * * *'
+
+jobs:
+  scan:
+    name: Daily Vulnerability Scan
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Pull Docker image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u github --password-stdin https://docker.pkg.github.com/v2/
+          docker pull docker.pkg.github.com/flownative/docker-base/base:latest
+
+      - uses: homoluctus/gitrivy@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image: 'docker.pkg.github.com/flownative/docker-base/base:latest'
+          severity: 'MEDIUM,HIGH,CRITICAL'
