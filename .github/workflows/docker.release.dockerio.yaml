@@ -1,10 +1,7 @@
-name: Docker Image Build
+name: Release latest version to docker.io
 on:
-  push:
-    branches-ignore:
-      - '**'
-    tags:
-      - 'v*.*.*'
+  schedule:
+    - cron: '30 0 * * 2'
 
 jobs:
   build:
@@ -13,17 +10,22 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          ref: 'latest'
 
-      - name: Publish docker.io image tags
-        uses: flownative/action-docker-publish-semver@master
+      - name: Determine latest released version
+        id: latest_version
+        uses: flownative/action-git-latest-release@master
+
+      - name: Publish release to docker.io
+        uses: flownative/action-docker-publish-semver@v1
         with:
-          tag_ref: ${{ github.ref }}
+          tag_ref: ${{ steps.latest_version.outputs.tag }}
           tag_latest: 'yes'
 
           source_image_name: docker.pkg.github.com/flownative/docker-base/base
           source_registry_username: github
           source_registry_password: ${{ secrets.GITHUB_TOKEN }}
+          source_registry_endpoint: https://docker.pkg.github.com/v2/
 
           target_image_name: flownative/base
           target_registry_username: ${{ secrets.DOCKER_IO_REGISTRY_USER }}
