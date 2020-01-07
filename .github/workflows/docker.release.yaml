@@ -21,10 +21,3 @@ jobs:
           tag_ref: ${{ github.ref }}
           image_name: flownative/docker-base/base
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create latest tag in Git
-        uses: EndBug/latest-tag@latest
-        with:
-          description: Latest released version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
