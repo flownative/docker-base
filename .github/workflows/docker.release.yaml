@@ -10,10 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
 
       - name: Build Docker image
         uses: flownative/action-docker-build@v1
