@@ -1,5 +1,6 @@
-name: Release latest version to docker.io
+name: Release latest version to gcr.io
 on:
+  push:
   schedule:
     - cron: '30 0,12 * * *'
 
@@ -17,7 +18,7 @@ jobs:
         id: latest_version
         uses: flownative/action-git-latest-release@master
 
-      - name: Publish release to docker.io
+      - name: Publish release to gcr.io
         uses: flownative/action-docker-publish-semver@v1
         with:
           tag_ref: ${{ steps.latest_version.outputs.tag }}
@@ -28,7 +29,7 @@ jobs:
           source_registry_password: ${{ secrets.GITHUB_BOT_TOKEN }}
           source_registry_endpoint: https://docker.pkg.github.com/v2/
 
-          target_image_name: flownative/base
-          target_registry_username: ${{ secrets.DOCKER_IO_REGISTRY_USER }}
-          target_registry_password: ${{ secrets.DOCKER_IO_REGISTRY_PASSWORD }}
-          target_registry_endpoint: https://index.docker.io/v1/
+          target_image_name: eu.gcr.io/flownative-beach/base
+          target_registry_username: '_json_key'
+          target_registry_password: ${{ secrets.GOOGLE_REGISTRY_PASSWORD }}
+          target_registry_endpoint: https://eu.gcr.io/v2/
