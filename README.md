@@ -1,7 +1,7 @@
 # Flownative Docker Base Image
 
-A Docker base image, derived from [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker), brushed up with some tools
-and further fine-tuning.
+A Docker base image, derived from [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker), 
+brushed up with some tools and further fine-tuning.
 
 ## Building this image
 
