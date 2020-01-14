@@ -18,3 +18,19 @@ jobs:
           tag_ref: ${{ github.ref }}
           image_name: flownative/docker-base/base
           registry_password: ${{ secrets.GITHUB_BOT_TOKEN }}
+
+      - name: Tag semver releases
+        uses: flownative/action-docker-publish-semver@v1
+        with:
+          tag_ref: ${{ steps.latest_version.outputs.tag }}
+          tag_latest: 'yes'
+
+          source_image_name: docker.pkg.github.com/flownative/docker-base/base
+          source_registry_username: github
+          source_registry_password: ${{ secrets.GITHUB_BOT_TOKEN }}
+          source_registry_endpoint: https://docker.pkg.github.com/v2/
+
+          target_image_name: docker.pkg.github.com/flownative/docker-base/base
+          target_registry_username: github
+          target_registry_password: ${{ secrets.GITHUB_TOKEN }}
+          target_registry_endpoint: https://docker.pkg.github.com/v2/
