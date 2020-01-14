@@ -22,7 +22,7 @@ jobs:
       - name: Tag semver releases
         uses: flownative/action-docker-publish-semver@v1
         with:
-          tag_ref: ${{ steps.latest_version.outputs.tag }}
+          tag_ref: ${{ github.ref }}
           tag_latest: 'yes'
 
           source_image_name: docker.pkg.github.com/flownative/docker-base/base
