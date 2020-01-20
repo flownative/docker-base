@@ -18,7 +18,7 @@ jobs:
         uses: flownative/action-git-latest-release@master
 
       - name: Build Docker image
-        uses: flownative/action-docker-build@v1
+        uses: flownative/action-docker-build@master
         with:
           tag_ref: ${{ steps.latest_version.outputs.tag }}
           image_name: flownative/docker-base/base
