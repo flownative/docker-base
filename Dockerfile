@@ -61,6 +61,9 @@ COPY --from=baseimage / /
 COPY conf/zshrc.conf /etc/zsh/zshrc
 
 ARG BUILD_DATE
+LABEL com.flownative.name="Flownative  Base Image"
+LABEL com.flownative.description="The base for most Docker images by Flownative. Will be replaced soon (early 2020)."
+LABEL com.flownative.vendor="Flownative GmbH"
 LABEL com.flownative.base-image-build-date=$BUILD_DATE
 
 ENV DEBIAN_FRONTEND="teletype" \
