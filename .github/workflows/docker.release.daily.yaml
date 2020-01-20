@@ -1,6 +1,5 @@
 name: Automatic rebuild of latest release
 on:
-  push:
   schedule:
     - cron: '0 0,12 * * *'
 
