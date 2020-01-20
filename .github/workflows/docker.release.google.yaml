@@ -18,7 +18,7 @@ jobs:
         uses: flownative/action-git-latest-release@master
 
       - name: Publish release to gcr.io
-        uses: flownative/action-docker-publish-semver@v1
+        uses: flownative/action-docker-publish-semver@master
         with:
           tag_ref: ${{ steps.latest_version.outputs.tag }}
           tag_latest: 'yes'
