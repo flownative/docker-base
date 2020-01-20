@@ -60,6 +60,9 @@ COPY --from=baseimage / /
 
 COPY conf/zshrc.conf /etc/zsh/zshrc
 
+ARG BUILD_DATE
+LABEL com.flownative.base-image-build-date=$BUILD_DATE
+
 ENV DEBIAN_FRONTEND="teletype" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
