@@ -13,6 +13,7 @@ jobs:
         with:
           tag_ref: ${{ github.event.client_payload.image_tag }}
           tag_latest: ${{ github.event.client_payload.tag_latest }}
+          tag_custom: ${{ github.event.client_payload.tag_custom }}
 
           source_image_name: ${{ github.event.client_payload.image_name }}
           source_registry_username: github
@@ -29,6 +30,7 @@ jobs:
         with:
           tag_ref: ${{ github.event.client_payload.image_tag }}
           tag_latest: ${{ github.event.client_payload.tag_latest }}
+          tag_custom: ${{ github.event.client_payload.tag_custom }}
 
           source_image_name: ${{ github.event.client_payload.image_name }}
           source_registry_username: github
