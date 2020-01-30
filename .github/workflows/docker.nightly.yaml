@@ -31,4 +31,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_BOT_TOKEN }}
           event-type: image-built
-          client-payload: '{"image_name": "${{ steps.build_image.outputs.image_name }}", "image_tag": "${{ steps.build_image.outputs.image_tag }}"}'
+          client-payload: '{"image_name": "${{ steps.build_image.outputs.image_name }}", "image_tag": "${{ steps.build_image.outputs.image_tag }}", "tag_latest": "yes", "tag_custom": "buster"}'
