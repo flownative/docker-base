@@ -12,6 +12,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-packages_install ca-certificates
+packages_install apt-utils ca-certificates
 packages_remove_docs_and_caches
 
