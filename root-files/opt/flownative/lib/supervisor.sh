@@ -82,16 +82,8 @@ supervisor_start() {
 # @return void
 #
 supervisor_stop() {
-#    local pid
-#    pid=$(supervisor_get_pid)
-#
-#    is_process_running "${pid}" || (info "Supervisor: Could not stop, because the process was not running (detected pid: ${pid})" && return)
     info "Supervisor: Stopping ..."
-
     supervisorctl shutdown
-#
-#    process_stop "${pid}"
-
     info "Supervisor: Process stopped"
 }
 
