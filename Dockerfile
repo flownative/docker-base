@@ -20,5 +20,5 @@ COPY root-files /
 RUN /build.sh && rm /build.sh
 
 USER 1000
-ENTRYPOINT ["/opt/flownative/init/sbin/init.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD [ "run" ]

@@ -59,7 +59,7 @@ supervisor_has_pid() {
 # ---------------------------------------------------------------------------------------
 # supervisor_start() - Start Supervisor
 #
-# @global SUPERVISOR_* The SUPERVISOR_ evnironment variables
+# @global SUPERVISOR_* The SUPERVISOR_ environment variables
 # @return void
 #
 supervisor_start() {
@@ -78,7 +78,7 @@ supervisor_start() {
 # ---------------------------------------------------------------------------------------
 # supervisor_stop() - Stop the Supervisor process based on the current PID
 #
-# @global SUPERVISOR_* The SUPERVISOR_ evnironment variables
+# @global SUPERVISOR_* The SUPERVISOR_ environment variables
 # @return void
 #
 supervisor_stop() {

@@ -11,11 +11,11 @@ integrated into the build pipeline of Flownative Docker images.
 This image contains a simple mechanism for automatic execution of
 init-scripts when the container is started.
 
-When included `init.sh` script is used as an ENTRYPOINT of your Docker
-container, it scans the directory `/opt/flownative/init/etc/init.d` for
-`.sh` files. The scripts are then called in an alphabetical order, so it
-makes sense to prefix filenames with a number, if the order is
-important.
+When included, the `init.sh` script is used as an ENTRYPOINT of your
+Docker container, it scans the directory
+`/opt/flownative/init/etc/init.d` for `.sh` files. The scripts are then
+called in an alphabetical order, so it makes sense to prefix filenames
+with a number, if the order is important.
 
 The `init.d` directory might contain files like these:
 
