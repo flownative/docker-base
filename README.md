@@ -55,6 +55,40 @@ Supervisor will look for configuration files in
 `/opt/flownative/supervisor/etc/conf.d/`. Add your own files in order to
 configure `supervisord` and use `supervisorctl` to control it.
 
+## syslog-ng
+
+This image contains [syslog-ng](https://github.com/syslog-ng/syslog-ng),
+a tool for processing logs of Linux processes. We use syslog-ng for
+collecting logs from the application(s) running in the container and
+output them to the console. This way you can see all logs via `docker
+logs` or through other tools fetching logs from STDOUT / STDERR and
+further log files.
+
+The application extending this image may add additional syslog-ng
+configuration by adding a file to `$SYSLOG_BASE_PATH/etc/conf.d`. The
+file should be named after the application (for example "nginx.conf").
+
+Note that the include file must not be a complete syslog-ng
+configuration file, which means that if it starts with a "@version"
+statement, it will not be included (see
+[documentation](https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.26/administration-guide/16#TOPIC-1430957)).
+
+Within configuration files you can easily use global environment
+variables using the backtick syntax:
+
+```
+    source s_nginx_common {
+           file("`FLOWNATIVE_LOG_PATH`/nginx_*.log");
+    };
+```
+
+You can check the actual "rendered" configuration by running the
+following command from a bash within the container:
+
+```
+    syslog-ng-ctl config -p
+```
+
 ## Building this image
 
 Build this image with `docker build`.

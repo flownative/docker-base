@@ -98,8 +98,4 @@ supervisor_initialize() {
         error "Supervisor: Container is running as root, but only unprivileged users are supported"
         exit 1
     fi;
-
-    # Create a file descriptor for Supervisor's stdout output and clean up the log
-    # lines a bit:
-    exec 3> >(sed -e "s/^\([0-9-]* [0-9:,]* [A-Z]*\)/\1   Supervisor:/")
 }

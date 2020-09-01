@@ -4,8 +4,16 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+. "${FLOWNATIVE_LIB_PATH}/syslog-ng.sh"
 . "${FLOWNATIVE_LIB_PATH}/init.sh"
 . "${FLOWNATIVE_LIB_PATH}/supervisor.sh"
+. "${FLOWNATIVE_LIB_PATH}/banner.sh"
+
+banner_flownative "Flownative Base Image"
+
+eval "$(syslog_env)"
+syslog_initialize
+syslog_start
 
 init_run
 
