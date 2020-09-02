@@ -16,6 +16,8 @@ set -o pipefail
 # ---------------------------------------------------------------------------------------
 # Main routine
 
+export FLOWNATIVE_LOG_PATH_AND_FILENAME=/dev/stdout
+
 banner_flownative 'Flownative Base Image'
 
 packages_install apt-utils ca-certificates supervisor syslog-ng logrotate
