@@ -30,6 +30,8 @@ init_run() {
             $file | (sed "s/^/${filename}: /" | output)
         done;
     else
-        info "Init: No custom init scripts found"
+        info "Init: No custom init scripts found in ${FLOWNATIVE_INIT_PATH}/etc/init.d"
     fi
+
+    info "Init: done"
 }

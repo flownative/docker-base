@@ -11,6 +11,9 @@ LABEL com.flownative.base-image-build-date=$BUILD_DATE
 
 ENV FLOWNATIVE_LIB_PATH="/opt/flownative/lib" \
     FLOWNATIVE_INIT_PATH="/opt/flownative/init" \
+    FLOWNATIVE_LOG_PATH="/opt/flownative/log" \
+    SYSLOG_BASE_PATH="/opt/flownative/syslog-ng" \
+    LOGROTATE_BASE_PATH="/opt/flownative/logrotate" \
     SUPERVISOR_BASE_PATH="/opt/flownative/supervisor" \
     LOG_DEBUG=true
 
@@ -20,5 +23,5 @@ COPY root-files /
 RUN /build.sh && rm /build.sh
 
 USER 1000
-ENTRYPOINT ["/opt/flownative/init/sbin/init.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD [ "run" ]

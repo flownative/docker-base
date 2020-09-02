@@ -59,7 +59,7 @@ supervisor_has_pid() {
 # ---------------------------------------------------------------------------------------
 # supervisor_start() - Start Supervisor
 #
-# @global SUPERVISOR_* The SUPERVISOR_ evnironment variables
+# @global SUPERVISOR_* The SUPERVISOR_ environment variables
 # @return void
 #
 supervisor_start() {
@@ -78,7 +78,7 @@ supervisor_start() {
 # ---------------------------------------------------------------------------------------
 # supervisor_stop() - Stop the Supervisor process based on the current PID
 #
-# @global SUPERVISOR_* The SUPERVISOR_ evnironment variables
+# @global SUPERVISOR_* The SUPERVISOR_ environment variables
 # @return void
 #
 supervisor_stop() {
@@ -98,8 +98,4 @@ supervisor_initialize() {
         error "Supervisor: Container is running as root, but only unprivileged users are supported"
         exit 1
     fi;
-
-    # Create a file descriptor for Supervisor's stdout output and clean up the log
-    # lines a bit:
-    exec 3> >(sed -e "s/^\([0-9-]* [0-9:,]* [A-Z]*\)/\1   Supervisor:/")
 }
