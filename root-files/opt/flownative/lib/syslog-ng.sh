@@ -75,12 +75,16 @@ syslog_start() {
     fi
 
     # shellcheck disable=SC2016
+    export SYSLOG_DESTINATION_STDOUT_TEMPLATE=${SYSLOG_DESTINATION_STDOUT_TEMPLATE:-'${HOUR}:${MIN}:${SEC} ${TZ} ${HOST} [${LEVEL}] ${MESSAGE}'}
+
     if is_boolean_yes "${SYSLOG_JSON}"; then
         info "syslog-ng: Logging mode is JSON"
-        export SYSLOG_DESTINATION_STDOUT_TEMPLATE=${SYSLOG_DESTINATION_STDOUT_TEMPLATE:-'${MESSAGE}'}
+        export SYSLOG_DESTINATION_STDOUT_DEVICE=/dev/null
+        export SYSLOG_DESTINATION_STDOUT_JSON_DEVICE=/dev/stdout
     else
         info "syslog-ng: Logging mode is text"
-        export SYSLOG_DESTINATION_STDOUT_TEMPLATE=${SYSLOG_DESTINATION_STDOUT_TEMPLATE:-'${HOUR}:${MIN}:${SEC} ${TZ} ${HOST} [${LEVEL}] ${MESSAGE}'}
+        export SYSLOG_DESTINATION_STDOUT_DEVICE=/dev/stdout
+        export SYSLOG_DESTINATION_STDOUT_JSON_DEVICE=/dev/null
     fi
 
     "${SYSLOG_BASE_PATH}/sbin/syslog-ng" \

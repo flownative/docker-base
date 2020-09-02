@@ -46,8 +46,8 @@ mv /usr/sbin/syslog-ng* ${SYSLOG_BASE_PATH}/sbin/
 ln -s ${SYSLOG_BASE_PATH}/tmp/syslog-ng.ctl /var/lib/syslog-ng/syslog-ng.ctl
 
 # Move logrotate files to correct location
+rm -rf /etc/logrotate.d
 mv /usr/sbin/logrotate ${LOGROTATE_BASE_PATH}/sbin/
-mv /etc/logrotate.d ${LOGROTATE_BASE_PATH}/etc/
 mv /etc/logrotate.conf ${LOGROTATE_BASE_PATH}/etc/
 
 # Move Supervisor files to correct location
