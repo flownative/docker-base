@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: 'master'
+          ref: 'debian-buster'
           fetch-depth: 100
 
       - name: Determine latest version
