@@ -20,7 +20,7 @@ export FLOWNATIVE_LOG_PATH_AND_FILENAME=/dev/stdout
 
 banner_flownative 'Flownative Base Image'
 
-packages_install apt-utils ca-certificates supervisor syslog-ng logrotate
+packages_install dpkg apt-utils ca-certificates supervisor syslog-ng logrotate
 
 # Clean up a few directories / files we don't need:
 rm -rf \
