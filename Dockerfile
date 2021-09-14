@@ -20,9 +20,6 @@ ENV FLOWNATIVE_LIB_PATH="/opt/flownative/lib" \
 
 COPY --from=europe-docker.pkg.dev/flownative/docker/bash-library:1.13.3 /lib $FLOWNATIVE_LIB_PATH
 
-# Workaround for https://github.com/docker/buildx/issues/495
-RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split && ln -s /usr/bin/dpkg-deb /usr/sbin/dpkg-deb && ln -s /bin/tar /usr/sbin/tar  && ln -s /bin/rm /usr/sbin/rm
-
 COPY root-files /
 RUN /build.sh && rm /build.sh
 
