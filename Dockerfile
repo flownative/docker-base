@@ -18,7 +18,7 @@ ENV FLOWNATIVE_LIB_PATH="/opt/flownative/lib" \
     SUPERVISOR_BASE_PATH="/opt/flownative/supervisor" \
     LOG_DEBUG=true
 
-COPY --from=docker.pkg.github.com/flownative/bash-library/bash-library:1 /lib $FLOWNATIVE_LIB_PATH
+COPY --from=europe-docker.pkg.dev/flownative/docker/bash-library:1.13.3 /lib $FLOWNATIVE_LIB_PATH
 
 COPY root-files /
 RUN /build.sh && rm /build.sh
