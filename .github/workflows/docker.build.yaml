@@ -1,5 +1,7 @@
 name: Build Docker images
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches-ignore:
       - '**'
@@ -26,6 +28,24 @@ jobs:
         with:
           ref: ${{ steps.latest_version.outputs.tag }}
           fetch-depth: 100
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            europe-docker.pkg.dev/flownative/docker/base
+            flownative/base
+          labels: |
+            org.opencontainers.image.title=Flownative  Base Image
+            org.opencontainers.image.description=The base for most Docker images by Flownative
+            org.opencontainers.image.licenses=MIT
+            org.opencontainers.image.vendor=Flownative GmbH
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,buster
 
       - name: Set up QEMU
         id: qemu
@@ -54,10 +74,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            flownative/base:${{ steps.latest_version.outputs.version }}
-            flownative/base:latest
-            flownative/base:buster
-            europe-docker.pkg.dev/flownative/docker/base:${{ steps.latest_version.outputs.version }}
-            europe-docker.pkg.dev/flownative/docker/base:latest
-            europe-docker.pkg.dev/flownative/docker/base:buster
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
