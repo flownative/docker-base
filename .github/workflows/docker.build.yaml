@@ -37,7 +37,7 @@ jobs:
             europe-docker.pkg.dev/flownative/docker/base
             flownative/base
           labels: |
-            org.opencontainers.image.title=Flownative  Base Image
+            org.opencontainers.image.title=Flownative Base Image
             org.opencontainers.image.description=The base for most Docker images by Flownative
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.vendor=Flownative GmbH
