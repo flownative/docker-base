@@ -1,6 +1,6 @@
-FROM bitnami/minideb:buster
+FROM bitnami/minideb:bullseye
 
-MAINTAINER Robert Lemke <robert@flownative.com>
+LABEL org.opencontainers.image.authors="Robert Lemke <robert@flownative.com>"
 
 ARG BUILD_DATE
 
