@@ -11,6 +11,7 @@
 
 . "${FLOWNATIVE_LIB_PATH}/log.sh"
 . "${FLOWNATIVE_LIB_PATH}/process.sh"
+. "${FLOWNATIVE_LIB_PATH}/validation.sh"
 
 # ---------------------------------------------------------------------------------------
 # syslog_env() - Load global environment variables for configuring syslog-ng
