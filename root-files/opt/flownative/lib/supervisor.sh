@@ -21,7 +21,6 @@
 supervisor_env() {
     cat <<"EOF"
 export SUPERVISOR_BASE_PATH="${SUPERVISOR_BASE_PATH}"
-export SUPERVISOR_ENABLE=${SUPERVISOR_ENABLE:-false}
 export PATH=${PATH}:${SUPERVISOR_BASE_PATH}/bin
 EOF
 }
@@ -29,7 +28,7 @@ EOF
 # ---------------------------------------------------------------------------------------
 # supervisor_get_pid() - Return the Supervisor process id
 #
-# @global SUPERVISOR_* The SUPERVISOR_ evnironment variables
+# @global SUPERVISOR_* The SUPERVISOR_ environment variables
 # @return Returns the Supervisor process id, if it is running, otherwise 0
 #
 supervisor_get_pid() {
