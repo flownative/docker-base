@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    name: "Build base image with Bullseye"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
