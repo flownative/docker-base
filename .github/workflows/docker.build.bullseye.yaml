@@ -1,12 +1,13 @@
 name: Build Docker images
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
   push:
-    branches-ignore:
-      - '**'
+    branches:
+      - 'bullseye'
     tags:
-      - 'v3.*.*'
+      - 'v*.*.*'
 
 jobs:
   build:
