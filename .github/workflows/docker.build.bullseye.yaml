@@ -87,3 +87,4 @@ jobs:
           subject: Github Actions heartbeat ping
           to: docker-build-base@flownative.heartbeat.eu.opsgenie.net
           from: Github Actions <noreply@flownative.com>
+          body: Build job of ${{github.repository}} completed successfully!
