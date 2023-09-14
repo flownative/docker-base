@@ -3,12 +3,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-  push:
-    branches-ignore:
-      - 'bionic'
-      - 'buster'
-    tags:
-      - 'v*.*.*'
 
 jobs:
   build:
