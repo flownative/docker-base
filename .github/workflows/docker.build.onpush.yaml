@@ -10,3 +10,4 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/docker.build.bullseye.yaml
+    secrets: inherit
