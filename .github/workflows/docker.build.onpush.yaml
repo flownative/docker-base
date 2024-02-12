@@ -4,10 +4,11 @@ on:
     branches-ignore:
       - 'bionic'
       - 'buster'
+      - 'bullseye'
     tags:
       - 'v*.*.*'
 
 jobs:
   build:
-    uses: ./.github/workflows/docker.build.bullseye.yaml
+    uses: ./.github/workflows/docker.build.bookworm.yaml
     secrets: inherit
