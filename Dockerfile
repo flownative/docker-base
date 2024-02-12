@@ -1,4 +1,4 @@
-FROM bitnami/minideb:bullseye
+FROM bitnami/minideb:bookworm
 
 LABEL org.opencontainers.image.authors="Robert Lemke <robert@flownative.com>"
 
