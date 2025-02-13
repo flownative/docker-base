@@ -48,6 +48,12 @@ jobs:
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v3
+        with:
+          # setup-qemu-action by default uses tonistiigi/binfmt:latest,
+          # which was out of date, see https://github.com/tonistiigi/binfmt/issues/165.
+          # This causes seg faults during build.
+          # Now it has been updated, but still causes segfaults.
+          image: tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Set up Docker Buildx
         id: buildx
