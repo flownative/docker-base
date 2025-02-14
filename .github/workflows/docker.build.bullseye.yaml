@@ -8,7 +8,8 @@ on:
 jobs:
   build:
     name: "Build base image with Bullseye"
-    runs-on: ubuntu-latest
+    # 22.04 instead of latest to hopefully fix segfaults with qemu
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
