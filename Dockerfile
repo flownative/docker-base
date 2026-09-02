@@ -1,6 +1,7 @@
-FROM bitnami/minideb:bookworm
+FROM debian:trixie-slim
 
 LABEL org.opencontainers.image.authors="Robert Lemke <robert@flownative.com>"
+LABEL org.opencontainers.image.base.name="docker.io/library/debian:trixie-slim"
 
 ARG BUILD_DATE
 

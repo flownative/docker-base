@@ -3,8 +3,43 @@
 
 # Flownative Docker Base Image
 
-A Docker base image, derived from [bitnami/minideb](https://github.com/bitnami/minideb),
-integrated into the build pipeline of Flownative Docker images.
+A Docker base image, derived from the official [debian](https://hub.docker.com/_/debian)
+"slim" image, integrated into the build pipeline of Flownative Docker images.
+
+Up to v3.x this image was derived from
+[bitnami/minideb](https://github.com/bitnami/minideb); the v4.x line
+(`trixie-slim` tag) is based on `debian:trixie-slim` instead. See
+[docs/trixie-slim-crossgrade.md](docs/trixie-slim-crossgrade.md) for the
+background and the migration notes.
+
+## Installing packages
+
+Images building on this base can install Debian packages either through the
+`packages_install` function of the bash library found in
+`$FLOWNATIVE_LIB_PATH/packages.sh`, or through the `install_packages` script,
+which behaves like the one formerly provided by minideb: it retries failed
+downloads, skips recommended packages and cleans the APT caches afterwards.
+
+```
+install_packages curl jq
+```
+
+A few defaults are baked into the image which derived images inherit during
+their builds:
+
+- APT never installs recommended or suggested packages and retries failed
+  downloads (`/etc/apt/apt.conf.d/01-flownative`)
+- packages are fetched via HTTPS
+- daemons installed during a build are kept from starting by a
+  `/usr/sbin/policy-rc.d` guard
+- documentation, man pages and locales are excluded via dpkg path-excludes
+- packages which serve no purpose in a container (`mount`, `login`,
+  `ncurses-bin`, `hostname`, the cron daemon) are removed
+- all setuid/setgid bits are removed and pinned via `dpkg-statoverride`, so
+  upgrades of those packages in derived images do not restore them; note that
+  packages installed in derived images may bring their own setuid binaries
+  (openssh-client's `ssh-agent`, for example) — stripping those is the
+  derived image's responsibility
 
 ## Init
 
